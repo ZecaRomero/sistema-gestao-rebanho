@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐮 Cadastro de Animal - Sistema de Gestão de Rebanho</title>
+    <title>Cadastro de Animal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,139 +13,69 @@
         <form action="salvar.php" method="POST">
             <fieldset>
                 <legend>Cadastro do Animal</legend>
-                <label for="animal">Animal:</label>
-                <input type="text" id="animal" name="animal" required><br>
-
-                <label for="raca">Raça:</label>
-                <input type="text" id="raca" name="raca"><br>
-
-                <label for="serie">Série:</label>
-                <input type="text" id="serie" name="serie"><br>
-
-                <label for="rg">RG:</label>
-                <input type="text" id="rg" name="rg"><br>
-
-                <label for="sexo">Sexo:</label>
-                <select id="sexo" name="sexo">
+                <label>Animal:</label> <input type="text" name="animal" required><br>
+                <label>Raça:</label> <input type="text" name="raca"><br>
+                <label>Série:</label> <input type="text" name="serie"><br>
+                <label>RG:</label> <input type="text" name="rg"><br>
+                <label>Sexo:</label>
+                <select name="sexo">
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
                 </select><br>
-
-                <label for="ativo">Ativo:</label>
-                <select id="ativo" name="ativo">
+                <label>Ativo:</label>
+                <select name="ativo">
                     <option value="S">Sim</option>
                     <option value="N">Não</option>
                 </select><br>
-
-                <label for="valor_adquirido">Valor Adquirido:</label>
-                <input type="number" id="valor_adquirido" name="valor_adquirido" step="0.01"><br>
-
-                <label for="valor_abate">Valor Abate:</label>
-                <input type="number" id="valor_abate" name="valor_abate" step="0.01"><br>
-
-                <label for="valor_venda">Valor Venda:</label>
-                <input type="number" id="valor_venda" name="valor_venda" step="0.01"><br>
+                <label>Valor Adquirido:</label> <input type="number" name="valor_adquirido" step="0.01"><br>
+                <label>Valor Abate:</label> <input type="number" name="valor_abate" step="0.01"><br>
+                <label>Valor Venda:</label> <input type="number" name="valor_venda" step="0.01"><br>
             </fieldset>
 
             <fieldset>
                 <legend>Entrada</legend>
-                <label for="origem">Origem:</label>
-                <input type="text" id="origem" name="origem"><br>
-
-                <label for="entrada_data">Data:</label>
-                <input type="date" id="entrada_data" name="entrada_data"><br>
-
-                <label for="entrada_nf">Nº N.F:</label>
-                <input type="text" id="entrada_nf" name="entrada_nf"><br>
-
-                <label for="entrada_natureza">Natureza:</label>
-                <input type="text" id="entrada_natureza" name="entrada_natureza"><br>
-
-                <label for="entrada_valor">Valor:</label>
-                <input type="number" id="entrada_valor" name="entrada_valor" step="0.01"><br>
-
-                <label for="entrada_obs">Observações:</label>
-                <input type="text" id="entrada_obs" name="entrada_obs"><br>
+                <label>Origem:</label> <input type="text" name="origem"><br>
+                <label>Data:</label> <input type="date" name="entrada_data"><br>
+                <label>Nº N.F:</label> <input type="text" name="entrada_nf"><br>
+                <label>Natureza:</label> <input type="text" name="entrada_natureza"><br>
+                <label>Valor:</label> <input type="number" name="entrada_valor" step="0.01"><br>
+                <label>Observações:</label> <input type="text" name="entrada_obs"><br>
             </fieldset>
 
             <fieldset>
                 <legend>Saída</legend>
-                <label for="destino">Destino:</label>
-                <input type="text" id="destino" name="destino"><br>
-
-                <label for="saida_data">Data:</label>
-                <input type="date" id="saida_data" name="saida_data"><br>
-
-                <label for="saida_nf">Nº N.F:</label>
-                <input type="text" id="saida_nf" name="saida_nf"><br>
-
-                <label for="saida_natureza">Natureza:</label>
-                <input type="text" id="saida_natureza" name="saida_natureza"><br>
-
-                <label for="saida_valor">Valor:</label>
-                <input type="number" id="saida_valor" name="saida_valor" step="0.01"><br>
-
-                <label for="saida_obs">Observações:</label>
-                <input type="text" id="saida_obs" name="saida_obs"><br>
-            </fieldset>
-
-            <fieldset id="situacaoAnimalFieldset">
-                <legend>Situação do Animal</legend>
-                <label for="prenha">Prenha:</label>
-                <select id="prenha" name="prenha">
-                    <option value="N">Não</option>
-                    <option value="S">Sim</option>
-                </select><br>
-
-                <div id="prenhaFields" style="display: none;">
-                    <label for="previsao_parto">Previsão de Parto:</label>
-                    <input type="date" id="previsao_parto" name="previsao_parto"><br>
-
-                    <label for="data_parto">Data do Parto:</label>
-                    <input type="date" id="data_parto" name="data_parto"><br>
-
-                    <label for="sexo_bezerro">Sexo do Bezerro:</label>
-                    <select id="sexo_bezerro" name="sexo_bezerro">
-                        <option value="M">Macho</option>
-                        <option value="F">Fêmea</option>
-                        <option value="">Não informado</option>
-                    </select><br>
-
-                    <label for="pai">Pai:</label>
-                    <input type="text" id="pai" name="pai"><br>
-
-                    <label for="cobertura">Cobertura:</label>
-                    <select id="cobertura" name="cobertura">
-                        <option value="TE">TE</option>
-                        <option value="FIV">FIV</option>
-                        <option value="">Não informado</option>
-                    </select><br>
-                </div>
+                <label>Destino:</label> <input type="text" name="destino"><br>
+                <label>Data:</label> <input type="date" name="saida_data"><br>
+                <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
+                <label>Natureza:</label> <input type="text" name="saida_natureza"><br>
+                <label>Valor:</label> <input type="number" name="saida_valor" step="0.01"><br>
+                <label>Observações:</label> <input type="text" name="saida_obs"><br>
             </fieldset>
 
             <fieldset>
-                <legend>Histórico de Saúde</legend>
-                <div id="healthHistoryContainer">
-                    <div class="health-entry-block">
-                        <label for="health_date_0">Data:</label>
-                        <input type="date" id="health_date_0" name="health_date[]"><br>
-
-                        <label for="health_event_0">Evento/Tratamento:</label>
-                        <input type="text" id="health_event_0" name="health_event[]"><br>
-
-                        <label for="health_vet_0">Veterinário:</label>
-                        <input type="text" id="health_vet_0" name="health_vet[]"><br>
-
-                        <label for="health_obs_0">Observações:</label>
-                        <input type="text" id="health_obs_0" name="health_obs[]"><br>
-                        </div>
-                </div>
-                <button type="button" id="addHealthEntryBtn" class="add-button">➕ Adicionar Novo Registro</button>
+                <legend>Situação do Animal</legend>
+                <label>Prenha:</label>
+                <select name="prenha">
+                    <option value="S">Sim</option>
+                    <option value="N">Não</option>
+                </select><br>
+                <label>Previsão de Parto:</label> <input type="date" name="previsao_parto"><br>
+                <label>Data do Parto:</label> <input type="date" name="data_parto"><br>
+                <label>Sexo do Bezerro:</label>
+                <select name="sexo_bezerro">
+                    <option value="M">Macho</option>
+                    <option value="F">Fêmea</option>
+                </select><br>
+                <label>Pai:</label> <input type="text" name="pai"><br>
+                <label>Cobertura:</label>
+                <select name="cobertura">
+                    <option value="TE">TE</option>
+                    <option value="FIV">FIV</option>
+                </select><br>
             </fieldset>
+
             <input type="submit" value="Salvar Dados">
         </form>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
