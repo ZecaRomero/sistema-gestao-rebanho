@@ -2,7 +2,12 @@ body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    background: linear-gradient(to right, #e0f2f7, #a7d9ed); /* Lighter blues for a fresher look */
+    display: flex; /* For centering the container */
+    justify-content: center; /* For centering the container */
+    align-items: center; /* For centering the container vertically */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    overflow-y: auto; /* Allow scrolling if content is long */
 }
 
 .container {
@@ -10,61 +15,178 @@ body {
     margin: 40px auto;
     padding: 30px;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 15px; /* Slightly more rounded corners */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* More prominent shadow for depth */
+    animation: fadeIn 1s ease-out; /* Add a fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #2c3e50; /* Darker, more prominent heading color */
     margin-bottom: 30px;
+    font-size: 2.5em; /* Slightly larger heading */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Subtle text shadow */
 }
 
 fieldset {
-    border: 2px solid #00a896;
+    border: 2px solid #00b894; /* Brighter green border */
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 8px;
-    background: #f0fdfa;
+    border-radius: 10px; /* More rounded fieldset */
+    background: #e8f8f5; /* Lighter, more vibrant background for fieldset */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+fieldset:hover {
+    border-color: #008f7d; /* Darker green on hover */
+    box-shadow: 0 0 15px rgba(0,184,148,0.2); /* Soft shadow on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
 }
 
 legend {
     font-weight: bold;
-    color: #00796b;
-    padding: 0 10px;
+    color: #007f6b; /* Deeper green for legend */
+    padding: 0 15px; /* Increased padding */
+    background: #ffffff; /* White background for legend to stand out */
+    border-radius: 5px; /* Rounded corners for legend */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for legend */
 }
 
 label {
     display: block;
-    margin-top: 10px;
-    font-weight: 500;
+    margin-top: 15px; /* Increased margin */
+    font-weight: 600; /* Bolder label text */
+    color: #34495e; /* Darker color for labels */
+    transition: color 0.2s ease;
 }
 
 input[type="text"],
 input[type="number"],
 input[type="date"],
 select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: calc(100% - 20px); /* Adjust width for padding */
+    padding: 10px; /* Increased padding */
+    margin-top: 8px;
+    margin-bottom: 18px; /* Increased margin */
+    border: 1px solid #b2bec3; /* Softer border color */
+    border-radius: 6px; /* Slightly more rounded */
+    transition: all 0.3s ease; /* Smooth transition for focus */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #00b894; /* Highlight border on focus */
+    box-shadow: 0 0 0 3px rgba(0,184,148,0.2), inset 0 1px 3px rgba(0,0,0,0.05); /* Glow effect on focus */
+    outline: none; /* Remove default outline */
 }
 
 input[type="submit"] {
     display: block;
     width: 100%;
-    padding: 12px;
-    background-color: #00a896;
+    padding: 15px; /* Increased padding */
+    background-color: #00b894; /* Brighter submit button */
     color: white;
     border: none;
-    font-size: 16px;
-    border-radius: 6px;
+    font-size: 18px; /* Larger font size */
+    font-weight: bold; /* Bolder text */
+    border-radius: 8px; /* More rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    letter-spacing: 0.5px; /* Slightly increased letter spacing */
+    box-shadow: 0 4px 10px rgba(0,184,148,0.3); /* Soft shadow for button */
+    margin-top: 30px; /* Space above submit button */
 }
 
 input[type="submit"]:hover {
-    background-color: #007f6b;
+    background-color: #008f7d; /* Darker green on hover */
+    box-shadow: 0 6px 15px rgba(0,184,148,0.4); /* More prominent shadow on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+input[type="submit"]:active {
+    background-color: #006b5b; /* Even darker green when clicked */
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 5px rgba(0,184,148,0.3); /* Smaller shadow when clicked */
+}
+
+/* New CSS for interactivity */
+#prenhaFields {
+    margin-top: 15px; /* Add some space above conditionally displayed fields */
+    padding-top: 15px;
+    border-top: 1px solid #cfe8e4; /* Subtle separator */
+}
+
+.required-highlight {
+    border-color: #e74c3c !important; /* Red border for missing required fields */
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* Styles for Add/Delete Buttons */
+.add-button, .delete-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-button {
+    background-color: #28a745; /* Green for add */
+    color: white;
+    width: 100%; /* Make add button full width within fieldset */
+}
+
+.add-button:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.delete-button {
+    background-color: #dc3545; /* Red for delete */
+    color: white;
+    margin-left: 10px; /* Space between delete button and last input */
+    float: right; /* Position to the right */
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* Style for each dynamically added block */
+.health-entry-block {
+    border: 1px dashed #a7d9ed; /* Dashed border for visual separation */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f9fcfe;
+    position: relative; /* For positioning the delete button */
+}
+
+.health-entry-block + .health-entry-block {
+    margin-top: 25px; /* More space between multiple entry blocks */
+}
+
+/* Clear float for delete button */
+.health-entry-block::after {
+    content: "";
+    display: table;
+    clear: both;
 }
