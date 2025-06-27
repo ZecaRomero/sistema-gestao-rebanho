@@ -190,3 +190,15 @@ input[type="submit"]:active {
     display: table;
     clear: both;
 }
+
+/* Fieldset específico para Saída */
+fieldset:has(legend:contains('Saída')) {
+    background: #fff3cd; /* Amarelo claro para destacar */
+    border-color:rgb(213, 31, 79); /* Amarelo para a borda */
+}
+
+/* Fieldset específico para Saída (compatível) */
+.saida-fieldset {
+    background: #fff3cd !important; /* Amarelo claro para destacar */
+    border-color:rgb(97, 7, 19) !important; /* Amarelo para a borda */
+}
