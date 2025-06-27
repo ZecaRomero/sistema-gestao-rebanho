@@ -123,27 +123,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 }); 
-
-// Dark Mode Toggle
-const darkToggle = document.getElementById("darkModeToggle");
-if (darkToggle) {
-    darkToggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
-    });
-}
-
-// Alerta de envio
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("✅ Dados salvos com sucesso!");
-    form.submit(); // Prossiga com envio real
-});
-
-// Botão de limpar
-const resetBtn = document.getElementById("resetForm");
-resetBtn?.addEventListener("click", () => {
-    if (!confirm("Tem certeza que deseja limpar todos os dados do formulário?")) {
-        event.preventDefault();
-    }
-});

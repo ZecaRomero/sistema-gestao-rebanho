@@ -558,35 +558,3 @@ select.pequeno {
     justify-content: center;
   }
 }
-
-
-body.dark-mode {
-    background: linear-gradient(to right, #2c3e50, #34495e);
-    color: white;
-}
-
-body.dark-mode .container {
-    background: #1e272e;
-    color: white;
-}
-
-body.dark-mode input,
-body.dark-mode select,
-body.dark-mode textarea {
-    background: #2f3640;
-    color: white;
-    border-color: #555;
-}
-
-.botoes-acao {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.botoes-acao button,
-.botoes-acao input[type="submit"] {
-    flex: 1;
-    font-size: 1em;
-}
