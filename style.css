@@ -214,10 +214,9 @@ fieldset:has(legend:contains('Entrada')):hover, .entrada-fieldset:hover {
 
 /* Fieldset Saída: laranja suave */
 fieldset:has(legend:contains('Saída')), .saida-fieldset {
-    background-color: #fff4e3 !important;
+    background: #fff4e3 !important;
     border: 2px solid #ff9800 !important;
     box-shadow: 0 2px 12px rgba(255, 152, 0, 0.08);
-    transition: background 0.3s, border-color 0.3s;
 }
 fieldset:has(legend:contains('Saída')):hover, .saida-fieldset:hover {
     background-color: #ffe0b2 !important;
@@ -444,6 +443,30 @@ input:focus, select:focus {
   #sexo-buttons {
     width: 100%;
     justify-content: flex-end;
+  }
+  .sexo-buttons-central {
+    width: 100%;
+    align-items: center;
+  }
+  .sexo-label-central {
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+  .sexo-btns-row {
+    flex-direction: row;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+  .sexo-btn {
+    width: 48%;
+    min-width: 0;
+    font-size: 1.1em;
+    padding: 14px 0;
+    margin: 0;
+    display: inline-block;
   }
 }
 
