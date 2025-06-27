@@ -11,9 +11,9 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 700px;
     margin: 40px auto;
-    padding: 30px;
+    padding: 18px;
     background: white;
     border-radius: 15px; /* Slightly more rounded corners */
     box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* More prominent shadow for depth */
@@ -41,7 +41,7 @@ h1 {
 
 fieldset {
     border: 2px solid #00b894; /* Brighter green border */
-    padding: 20px;
+    padding: 12px;
     margin-bottom: 20px;
     border-radius: 10px; /* More rounded fieldset */
     background: #e8f8f5; /* Lighter, more vibrant background for fieldset */
@@ -76,13 +76,14 @@ input[type="number"],
 input[type="date"],
 select {
     width: calc(100% - 20px); /* Adjust width for padding */
-    padding: 10px; /* Increased padding */
+    padding: 7px;
     margin-top: 8px;
     margin-bottom: 18px; /* Increased margin */
     border: 1px solid #b2bec3; /* Softer border color */
     border-radius: 6px; /* Slightly more rounded */
     transition: all 0.3s ease; /* Smooth transition for focus */
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
+    font-size: 1em;
 }
 
 input[type="text"]:focus,
@@ -201,4 +202,113 @@ fieldset:has(legend:contains('Saída')) {
 .saida-fieldset {
     background: #fff3cd !important; /* Amarelo claro para destacar */
     border-color:rgb(97, 7, 19) !important; /* Amarelo para a borda */
+}
+
+/* Botões de seleção de sexo */
+.sexo-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    outline: none;
+}
+.sexo-macho {
+    background: #2196f3;
+    color: #fff;
+}
+.sexo-femea {
+    background: #e75480;
+    color: #fff;
+}
+.sexo-btn.selected {
+    box-shadow: 0 0 0 4px rgba(33,150,243,0.2), 0 2px 8px rgba(0,0,0,0.08);
+    filter: brightness(1.1);
+    border: 2px solid #333;
+}
+.sexo-femea.selected {
+    box-shadow: 0 0 0 4px rgba(231,84,128,0.2), 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid #a81e4a;
+}
+#sexo-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Botões de seleção de ativo */
+.ativo-btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    outline: none;
+}
+.ativo-sim {
+    background: #28a745;
+    color: #fff;
+}
+.ativo-nao {
+    background: #6c757d;
+    color: #fff;
+}
+.ativo-btn.selected {
+    box-shadow: 0 0 0 4px rgba(40,167,69,0.2), 0 2px 8px rgba(0,0,0,0.08);
+    filter: brightness(1.1);
+    border: 2px solid #333;
+}
+.ativo-nao.selected {
+    box-shadow: 0 0 0 4px rgba(108,117,125,0.2), 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid #444;
+}
+#ativo-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Layout flexível para campos lado a lado */
+.row-flex {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+.col-flex {
+    flex: 1 1 0;
+    min-width: 120px;
+}
+.col-flex-full {
+    flex: 2 1 0;
+    min-width: 200px;
+}
+
+/* Input menor para valores compactos */
+.pequeno {
+    max-width: 110px;
+    min-width: 70px;
+    display: inline-block;
+}
+
+/* Resumo do valor final */
+.resumo-valor {
+    margin-top: 18px;
+    padding: 10px 0 0 0;
+    font-size: 1.1em;
+    color: #2c3e50;
+    border-top: 1px solid #e0e0e0;
+}
+
+input.pequeno {
+    max-width: 90px;
 }

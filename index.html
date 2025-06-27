@@ -12,23 +12,85 @@
         <form action="salvar.php" method="POST">
             <fieldset>
                 <legend>Cadastro do Animal</legend>
-                <label>Animal:</label> <input type="text" name="animal" required><br>
-                <label>Raça:</label> <input type="text" name="raca"><br>
-                <label>Série:</label> <input type="text" name="serie"><br>
-                <label>RG:</label> <input type="text" name="rg"><br>
-                <label>Sexo:</label>
-                <select name="sexo">
-                    <option value="M">Macho</option>
-                    <option value="F">Fêmea</option>
-                </select><br>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Série:</label> <input type="text" name="serie">
+                    </div>
+                    <div class="col-flex">
+                        <label>RG:</label> <input type="text" name="rg">
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Nascimento:</label> <input type="date" name="nascimento">
+                    </div>
+                    <div class="col-flex">
+                        <label>Meses:</label> <input type="number" name="meses" min="0">
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex pequeno">
+                        <label>Raça:</label> <input type="text" name="raca" class="pequeno">
+                    </div>
+                    <div class="col-flex">
+                        <label>Sexo:</label>
+                        <div id="sexo-buttons">
+                            <button type="button" class="sexo-btn sexo-macho" data-value="M">Macho</button>
+                            <button type="button" class="sexo-btn sexo-femea" data-value="F">Fêmea</button>
+                            <input type="hidden" name="sexo" id="sexo-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Pai:</label> <input type="text" name="pai">
+                    </div>
+                    <div class="col-flex">
+                        <label>Avô Materno:</label> <input type="text" name="avo_materno">
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Mãe Biológica:</label> <input type="text" name="mae_biologica">
+                    </div>
+                    <div class="col-flex">
+                        <label>Receptora:</label> <input type="text" name="receptora">
+                    </div>
+                </div>
                 <label>Ativo:</label>
-                <select name="ativo">
-                    <option value="S">Sim</option>
-                    <option value="N">Não</option>
-                </select><br>
-                <label>Valor Adquirido:</label> <input type="number" name="valor_adquirido" step="0.01"><br>
-                <label>Valor Abate:</label> <input type="number" name="valor_abate" step="0.01"><br>
-                <label>Valor Venda:</label> <input type="number" name="valor_venda" step="0.01"><br>
+                <div id="ativo-buttons">
+                    <button type="button" class="ativo-btn ativo-sim" data-value="S">Sim</button>
+                    <button type="button" class="ativo-btn ativo-nao" data-value="N">Não</button>
+                    <input type="hidden" name="ativo" id="ativo-input">
+                </div><br>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Valor Adquirido:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_adquirido" inputmode="decimal">
+                    </div>
+                    <div class="col-flex">
+                        <label>Origem da Compra:</label> <input type="text" name="origem_compra">
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Valor Abate:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_abate" inputmode="decimal">
+                    </div>
+                    <div class="col-flex">
+                        <label>Destino Abate:</label> <input type="text" name="destino_abate">
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Valor Venda:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_venda" inputmode="decimal">
+                    </div>
+                    <div class="col-flex">
+                        <label>Destino Venda:</label> <input type="text" name="destino_venda">
+                    </div>
+                </div>
+                <!-- Resumo do valor final -->
+                <div class="resumo-valor">
+                    <strong>Resumo:</strong> Valor da Compra - Valor de Venda = <span id="valor-final">R$ 0,00</span>
+                </div>
             </fieldset>
 
             <fieldset>
@@ -37,17 +99,23 @@
                 <label>Data:</label> <input type="date" name="entrada_data"><br>
                 <label>Nº N.F:</label> <input type="text" name="entrada_nf"><br>
                 <label>Natureza:</label> <input type="text" name="entrada_natureza"><br>
-                <label>Valor:</label> <input type="number" name="entrada_valor" step="0.01"><br>
+                <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais" name="entrada_valor" inputmode="decimal"><br>
                 <label>Observações:</label> <input type="text" name="entrada_obs"><br>
             </fieldset>
 
             <fieldset class="saida-fieldset">
                 <legend>Saída</legend>
-                <label>Destino:</label> <input type="text" name="destino"><br>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="saida_valor" inputmode="decimal">
+                    </div>
+                    <div class="col-flex">
+                        <label>Destino:</label> <input type="text" name="destino">
+                    </div>
+                </div>
                 <label>Data:</label> <input type="date" name="saida_data"><br>
                 <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
                 <label>Natureza:</label> <input type="text" name="saida_natureza"><br>
-                <label>Valor:</label> <input type="number" name="saida_valor" step="0.01"><br>
                 <label>Observações:</label> <input type="text" name="saida_obs"><br>
             </fieldset>
 
@@ -55,19 +123,21 @@
                 <legend>Situação do Animal</legend>
                 <label>Prenha:</label>
                 <select name="prenha">
+                    <option value="">Selecione</option>
                     <option value="S">Sim</option>
                     <option value="N">Não</option>
                 </select><br>
                 <label>Previsão de Parto:</label> <input type="date" name="previsao_parto"><br>
                 <label>Data do Parto:</label> <input type="date" name="data_parto"><br>
-                <label>Sexo do Bezerro:</label>
+                <label>Sexo da cria:</label>
                 <select name="sexo_bezerro">
+                    <option value="">Selecione</option>
                     <option value="M">Macho</option>
                     <option value="F">Fêmea</option>
                 </select><br>
-                <label>Pai:</label> <input type="text" name="pai"><br>
-                <label>Cobertura:</label>
+                <label>Tipo de Cobertura:</label>
                 <select name="cobertura">
+                    <option value="">Selecione</option>
                     <option value="TE">TE</option>
                     <option value="FIV">FIV</option>
                 </select><br>
@@ -76,5 +146,7 @@
             <input type="submit" value="Salvar Dados">
         </form>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
