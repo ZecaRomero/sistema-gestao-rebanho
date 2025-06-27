@@ -10,7 +10,7 @@
     <div class="container">
         <h1>🐮 Sistema de Gestão de Rebanho</h1>
         <form action="salvar.php" method="POST">
-            <fieldset>
+            <fieldset class="cadastro-fieldset">
                 <legend>Cadastro do Animal</legend>
                 <div class="row-flex">
                     <div class="col-flex">
@@ -25,19 +25,31 @@
                         <label>Nascimento:</label> <input type="date" name="nascimento">
                     </div>
                     <div class="col-flex">
-                        <label>Meses:</label> <input type="number" name="meses" min="0">
+                        <label>Meses:</label> <input type="number" name="meses" min="0" readonly> <span id="idade-anos" class="idade-anos"></span>
                     </div>
                 </div>
                 <div class="row-flex">
                     <div class="col-flex pequeno">
-                        <label>Raça:</label> <input type="text" name="raca" class="pequeno">
+                        <label>Raça:</label>
+                        <select name="raca" class="pequeno">
+                            <option value="">Selecione</option>
+                            <option value="Nelore">Nelore</option>
+                            <option value="Brahman">Brahman</option>
+                            <option value="Gir">Gir</option>
+                            <option value="Receptoras">Receptoras</option>
+                            <option value="Cruza">Cruza</option>
+                            <option value="Nelore PA">Nelore PA</option>
+                        </select>
                     </div>
                     <div class="col-flex">
-                        <label>Sexo:</label>
-                        <div id="sexo-buttons">
-                            <button type="button" class="sexo-btn sexo-macho" data-value="M">Macho</button>
-                            <button type="button" class="sexo-btn sexo-femea" data-value="F">Fêmea</button>
+                        <div id="sexo-buttons" class="sexo-buttons-central">
+                            <label class="sexo-label-central">Sexo:</label>
+                            <div class="sexo-btns-row">
+                                <button type="button" class="sexo-btn sexo-macho" data-value="M" aria-label="Selecionar macho">Macho</button>
+                                <button type="button" class="sexo-btn sexo-femea" data-value="F" aria-label="Selecionar fêmea">Fêmea</button>
+                            </div>
                             <input type="hidden" name="sexo" id="sexo-input">
+                            <span id="sexo-feedback" class="feedback"></span>
                         </div>
                     </div>
                 </div>
@@ -93,7 +105,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="entrada-fieldset">
                 <legend>Entrada</legend>
                 <label>Origem:</label> <input type="text" name="origem"><br>
                 <label>Data:</label> <input type="date" name="entrada_data"><br>
@@ -119,7 +131,7 @@
                 <label>Observações:</label> <input type="text" name="saida_obs"><br>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="situacao-fieldset">
                 <legend>Situação do Animal</legend>
                 <label>Prenha:</label>
                 <select name="prenha">
