@@ -235,28 +235,37 @@ fieldset:has(legend:contains('Situação do Animal')):hover, .situacao-fieldset:
     border-color: #7c3fa0 !important;
 }
 
+.situacao-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.situacao-col {
+    flex: 1 1 250px;
+    min-width: 200px;
+}
+
 /* Botões de seleção de sexo */
 .sexo-btn {
-    padding: 12px 28px;
+    padding: 8px 24px;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1em;
+    border-radius: 16px;
     font-weight: bold;
-    margin-right: 15px;
-    margin-bottom: 10px;
+    color: #fff;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    outline: none;
+    font-size: 1.1em;
 }
+
 .sexo-macho {
     background: #2196f3;
-    color: #fff;
 }
+
 .sexo-femea {
-    background: #e75480;
-    color: #fff;
+    background: #e57373;
 }
+
 .sexo-btn.selected {
     box-shadow: 0 0 0 4px rgba(33,150,243,0.2), 0 2px 8px rgba(0,0,0,0.08);
     filter: brightness(1.1);
@@ -314,9 +323,9 @@ fieldset:has(legend:contains('Situação do Animal')):hover, .situacao-fieldset:
 /* Layout flexível para campos lado a lado */
 .row-flex {
     display: flex;
-    gap: 0;
-    margin-bottom: 10px;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
 }
 .col-flex {
     flex: 1 1 0;
@@ -329,9 +338,11 @@ fieldset:has(legend:contains('Situação do Animal')):hover, .situacao-fieldset:
 
 /* Input menor para valores compactos */
 .pequeno {
-    max-width: 110px;
-    min-width: 70px;
-    display: inline-block;
+    font-size: 0.95em;
+    padding: 6px 8px;
+    height: 34px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 /* Resumo do valor final */
@@ -384,10 +395,12 @@ input.pequeno {
 
 /* Feedback de seleção */
 .feedback {
-    margin-left: 10px;
+    display: block !important;
+    margin: 10px auto 0 auto;
     font-size: 1.1em;
     color: #00b894;
     font-weight: bold;
+    text-align: center;
     transition: color 0.2s;
 }
 
@@ -533,12 +546,12 @@ select.pequeno {
 .sexo-buttons-central {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    justify-content: center;
     align-items: center;
-    margin-left: auto;
-    margin-right: 0;
 }
 .sexo-label-central {
-    margin-bottom: 4px;
+    margin-bottom: 48px;
     text-align: center;
     font-weight: 600;
     color: #34495e;
@@ -546,19 +559,20 @@ select.pequeno {
 }
 .sexo-btns-row {
     display: flex;
-    flex-direction: row;
     gap: 10px;
-    justify-content: center;
-    width: 100%;
 }
-@media (max-width: 600px) {
-  .sexo-buttons-central {
-    width: 100%;
-  }
-  .sexo-btns-row {
-    width: 100%;
-    justify-content: center;
-  }
+
+.sexo-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.resumo-fieldset input[type="text"], .resumo-fieldset select {
+    padding: 6px 8px;
+    font-size: 1em;
+    margin-bottom: 0;
 }
 
 /* Estilos do Cabeçalho e Botão de Sair */
@@ -612,30 +626,33 @@ select.pequeno {
 .stats-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 6px;
+    margin-bottom: 6px;
     width: 100%;
     max-width: 900px;
 }
 
 .stat-card {
     background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 6px 8px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
     text-align: center;
     flex-grow: 1;
+    cursor: pointer;
+    max-width: 110px;
+    min-width: 80px;
 }
 
 .stat-card h2 {
-    margin: 0 0 10px;
-    font-size: 1.2em;
+    margin: 0 0 4px;
+    font-size: 0.95em;
     color: #333;
 }
 
 .stat-card p {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: bold;
     color: #007bff;
 }
@@ -662,10 +679,10 @@ select.pequeno {
 
 /* Efeito de hover para o card clicável */
 .stat-card-link {
-    text-decoration: none;
-    color: inherit;
     display: block;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
 }
 
 .stat-card-link:hover .stat-card {
@@ -777,3 +794,98 @@ select.pequeno {
 .fieldset-row .situacao-fieldset {
     flex: 1; /* Ocupa 1/3 do espaço */
 }
+/* Ajuste para Situação do Animal - alinhamento perfeito e responsivo */
+.situacao-fieldset .row-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+.situacao-fieldset .col-flex.pequeno {
+  flex: 1 1 0;
+  min-width: 180px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+.situacao-fieldset label {
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.situacao-fieldset select.pequeno,
+.situacao-fieldset input.pequeno {
+  width: 100%;
+  margin-bottom: 0;
+}
+@media (max-width: 700px) {
+  .situacao-fieldset .row-flex {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .situacao-fieldset .col-flex.pequeno {
+    max-width: 100%;
+  }
+}
+
+/* Força o layout lado a lado só na seção Situação do Animal */
+.situacao-fieldset {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 24px;
+}
+
+.situacao-fieldset .row-flex {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 24px !important;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.situacao-fieldset .col-flex.pequeno {
+  flex: 1 1 0;
+  min-width: 200px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.situacao-fieldset label {
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.situacao-fieldset select.pequeno,
+.situacao-fieldset input.pequeno {
+  width: 100%;
+  margin-bottom: 0;
+  min-height: 36px;
+  font-size: 1em;
+}
+
+@media (max-width: 800px) {
+  .situacao-fieldset .row-flex {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .situacao-fieldset .col-flex.pequeno {
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+.stats-container .stat-card:last-child {
+    max-width: 240px;
+    min-width: 240px;
+}
+
+.row-flex .col-flex input,
+.row-flex .col-flex select {
+    width: 95%;
+    max-width: 100%;
+    display: inline-block;
+    margin-bottom: 0;
+}
+

@@ -28,7 +28,8 @@ unset($_SESSION['erro']);
 </head>
 <body>
     <div class="header-container">
-        <h1>🐮 Sistema de Gestão de Rebanho</h1>
+        <img src="logo.png" alt="Logotipo" style="height:48px; margin-right:16px; vertical-align:middle;">
+        <h1 style="display:inline-block; vertical-align:middle;">🐮 Sistema de Gestão de Rebanho</h1>
         <a href="logout.php" class="logout-btn">Sair</a>
     </div>
 
@@ -83,16 +84,20 @@ unset($_SESSION['erro']);
                             <option value="Nelore PA">Nelore PA</option>
                         </select>
                     </div>
-                    <div class="col-flex">
-                        <label>Sexo:</label>
-                        <div id="sexo-buttons" class="sexo-buttons-central">
-                            <div class="sexo-btns-row">
-                                <button type="button" class="sexo-btn sexo-macho" data-value="M" aria-label="Selecionar macho">Macho</button>
-                                <button type="button" class="sexo-btn sexo-femea" data-value="F" aria-label="Selecionar fêmea">Fêmea</button>
+                    <div class="col-flex" style="display: flex; flex-direction: column; align-items: flex-end;">
+                        <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                            <label style="margin-bottom: 6px; text-align: center;">Sexo:</label>
+                            <div id="sexo-buttons" class="sexo-buttons-central">
+                                <div class="sexo-btns-row">
+                                    <button type="button" class="sexo-btn sexo-macho" data-value="M" aria-label="Selecionar macho">Macho</button>
+                                    <button type="button" class="sexo-btn sexo-femea" data-value="F" aria-label="Selecionar fêmea">Fêmea</button>
+                                </div>
+                                <input type="hidden" name="sexo" id="sexo-input">
+                                <span id="sexo-feedback" class="feedback"></span>
                             </div>
-                            <input type="hidden" name="sexo" id="sexo-input">
-                            <span id="sexo-feedback" class="feedback"></span>
                         </div>
+                        <span id="valor-real-feedback" class="feedback"></span>
+                        <div id="grafico-valor-real" style="width:100%;margin-top:8px;"></div>
                     </div>
                 </div>
                 <div class="row-flex">
@@ -114,7 +119,7 @@ unset($_SESSION['erro']);
             <div class="fieldset-row">
                 <fieldset class="entrada-fieldset">
                     <legend>Entrada</legend>
-                    <label>Origem:</label> <input type="text" name="origem" id="entrada-origem"><br>
+                    <label>Origem:</label> <input type="text" name="entrada_destino" id="entrada-destino"><br>
                     <label>Data:</label> <input type="date" name="entrada_data"><br>
                     <label>Nº N.F:</label> <input type="text" name="entrada_nf"><br>
                     <label>Natureza:</label> <input type="text" name="entrada_natureza"><br>
@@ -124,41 +129,47 @@ unset($_SESSION['erro']);
 
                 <fieldset class="saida-fieldset">
                     <legend>Saída</legend>
-                    <div class="row-flex">
-                        <div class="col-flex">
-                            <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="saida_valor" inputmode="decimal">
-                        </div>
-                        <div class="col-flex">
-                            <label>Destino:</label> <input type="text" name="destino">
-                        </div>
-                    </div>
+                    <label>Destino:</label> <input type="text" 
                     <label>Data:</label> <input type="date" name="saida_data"><br>
                     <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
                     <label>Natureza:</label> <input type="text" name="saida_natureza"><br>
+                    <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais" name="saida_valor" id="saida-valor" inputmode="decimal"><br>
                     <label>Observações:</label> <input type="text" name="saida_obs"><br>
                 </fieldset>
             </div>
 
             <fieldset class="situacao-fieldset">
                 <legend>Situação do Animal</legend>
-                <label>Prenha:</label>
-                <select name="prenha">
-                    <option value="">Selecione</option>
-                    <option value="S">Sim</option>
-                    <option value="N">Não</option>
-                </select><br>
-                <label>Previsão de Parto:</label> <input type="date" name="previsao_parto"><br>
-                <label>Data do Parto:</label> <input type="date" name="data_parto"><br>
-                <label>Sexo da cria:</label>
-                <select name="sexo_bezerro">
-                    <option value="">Selecione</option>
-                    <option value="M">Macho</option>
-                    <option value="F">Fêmea</option>
-                </select><br>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Prenha:</label>
+                        <select name="prenha">
+                            <option value="">Selecione</option>
+                            <option value="S">Sim</option>
+                            <option value="N">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-flex">
+                        <label>Previsão de Parto:</label> <input type="date" name="previsao_parto">
+                    </div>
+                </div>
+                <div class="row-flex">
+                    <div class="col-flex">
+                        <label>Data do Parto:</label> <input type="date" name="data_parto">
+                    </div>
+                    <div class="col-flex">
+                        <label>Sexo da cria:</label>
+                        <select name="sexo_bezerro">
+                            <option value="">Selecione</option>
+                            <option value="M">Macho</option>
+                            <option value="F">Fêmea</option>
+                        </select>
+                    </div>
+                </div>
                 <label>Tipo de Cobertura:</label>
                 <select name="cobertura">
                     <option value="">Selecione</option>
-                    <option value="TE">TE</option>
+                    <option value="TE">IA</option>
                     <option value="FIV">FIV</option>
                 </select><br>
             </fieldset>
