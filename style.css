@@ -3,16 +3,18 @@ body {
     margin: 0;
     padding: 0;
     background: linear-gradient(to right, #e0f2f7, #a7d9ed); /* Lighter blues for a fresher look */
-    display: flex; /* For centering the container */
-    justify-content: center; /* For centering the container */
-    align-items: center; /* For centering the container vertically */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
     min-height: 100vh; /* Ensure body takes full viewport height */
     overflow-y: auto; /* Allow scrolling if content is long */
 }
 
 .container {
     max-width: 700px;
-    margin: 40px auto;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 40px 20px; /* Vertical and horizontal margin */
     padding: 18px;
     background: white;
     border-radius: 15px; /* Slightly more rounded corners */
@@ -561,6 +563,8 @@ select.pequeno {
 
 /* Estilos do Cabeçalho e Botão de Sair */
 .header-container {
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;

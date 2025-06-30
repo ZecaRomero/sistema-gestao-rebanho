@@ -121,7 +121,7 @@ if (empty($_SESSION['logado'])) {
                 <label>Origem:</label> <input type="text" name="origem"><br>
                 <label>Data:</label> <input type="date" name="entrada_data"><br>
                 <label>Nº N.F:</label> <input type="text" name="entrada_nf"><br>
-                <label>Natureza:</label> <input type="text" name="entrada_natureza"><br>
+                <label>Natureza da Operação:</label> <input type="text" name="entrada_natureza"><br>
                 <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais" name="entrada_valor" inputmode="decimal"><br>
                 <label>Observações:</label> <input type="text" name="entrada_obs"><br>
             </fieldset>
@@ -138,7 +138,7 @@ if (empty($_SESSION['logado'])) {
                 </div>
                 <label>Data:</label> <input type="date" name="saida_data"><br>
                 <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
-                <label>Natureza:</label> <input type="text" name="saida_natureza"><br>
+                <label>Natureza da Operação:</label> <input type="text" name="saida_natureza"><br>
                 <label>Observações:</label> <input type="text" name="saida_obs"><br>
             </fieldset>
 
@@ -161,7 +161,7 @@ if (empty($_SESSION['logado'])) {
                 <label>Tipo de Cobertura:</label>
                 <select name="cobertura">
                     <option value="">Selecione</option>
-                    <option value="TE">TE</option>
+                    <option value="TE">IA</option>
                     <option value="FIV">FIV</option>
                 </select><br>
             </fieldset>
