@@ -306,12 +306,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function atualizarStatusPorSaida() {
         const saidaInput = document.getElementById('saida-valor');
         const ativoInput = document.getElementById('ativo-input');
-        if (!saidaInput || !ativoInput) return;
+        const statusAnimal = document.getElementById('status-animal');
+        if (!saidaInput || !ativoInput || !statusAnimal) return;
         const valorSaida = parseBRL(saidaInput.value);
         if (valorSaida > 0) {
             ativoInput.value = 'N';
+            statusAnimal.value = 'INATIVO';
+            statusAnimal.style.color = '#dc3545';
         } else {
             ativoInput.value = 'S';
+            statusAnimal.value = 'ATIVO';
+            statusAnimal.style.color = '#28a745';
         }
         updateAnimalStatusText && updateAnimalStatusText();
     }
@@ -319,4 +324,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const saidaInputAuto = document.getElementById('saida-valor');
     if (saidaInputAuto) saidaInputAuto.addEventListener('input', atualizarStatusPorSaida);
     atualizarStatusPorSaida();
+
+    // Atualizar status ao digitar no campo de destino de saída
+    const saidaDestinoInput = document.getElementById('saida-destino');
+    if (saidaDestinoInput) {
+        saidaDestinoInput.addEventListener('input', function() {
+            const ativoInput = document.getElementById('ativo-input');
+            const statusAnimal = document.getElementById('status-animal');
+            if (!ativoInput || !statusAnimal) return;
+            if (saidaDestinoInput.value.trim() !== '') {
+                ativoInput.value = 'N';
+                statusAnimal.value = 'INATIVO';
+                statusAnimal.style.color = '#dc3545';
+            } else {
+                ativoInput.value = 'S';
+                statusAnimal.value = 'ATIVO';
+                statusAnimal.style.color = '#28a745';
+            }
+            updateAnimalStatusText && updateAnimalStatusText();
+        });
+    }
 }); 

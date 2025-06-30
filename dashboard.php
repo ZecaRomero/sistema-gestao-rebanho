@@ -104,6 +104,7 @@ unset($_SESSION['erro']);
                     <div class="col-flex">
                         <label>Status:</label>
                         <input type="text" id="status-animal" value="ATIVO" readonly style="font-weight:bold; color:#28a745; width: 120px;">
+                        <input type="hidden" name="ativo" id="ativo-input" value="S">
                     </div>
                 </div>
                 <div class="row-flex">
@@ -129,7 +130,7 @@ unset($_SESSION['erro']);
 
                 <fieldset class="saida-fieldset">
                     <legend>Saída</legend>
-                    <label>Destino:</label> <input type="text" 
+                    <label>Destino:</label> <input type="text" name="saida_destino" id="saida-destino"><br>
                     <label>Data:</label> <input type="date" name="saida_data"><br>
                     <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
                     <label>Natureza:</label> <input type="text" name="saida_natureza"><br>
