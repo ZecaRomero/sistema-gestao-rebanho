@@ -1,10 +1,22 @@
 <?php
 session_start();
+require 'db.php'; // Incluindo a conexão com o banco
+
 if (empty($_SESSION['logado'])) {
     header('Location: index.html');
     exit;
 }
-// Restante do código permanece igual
+
+// Buscar estatísticas
+$total_animais = $pdo->query("SELECT COUNT(*) FROM animais")->fetchColumn();
+$ultimo_animal = $pdo->query("SELECT serie, rg FROM animais ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+
+// Pega e limpa as mensagens da sessão
+$mensagem = $_SESSION['mensagem'] ?? null;
+unset($_SESSION['mensagem']);
+
+$erro = $_SESSION['erro'] ?? null;
+unset($_SESSION['erro']);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,37 +24,56 @@ if (empty($_SESSION['logado'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Animal</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div class="header-container">
         <h1>🐮 Sistema de Gestão de Rebanho</h1>
         <a href="logout.php" class="logout-btn">Sair</a>
     </div>
+
+    <!-- Container de Notificações -->
+    <?php if ($mensagem): ?>
+        <div class="notificacao sucesso"><?php echo htmlspecialchars($mensagem); ?></div>
+    <?php endif; ?>
+    <?php if ($erro): ?>
+        <div class="notificacao erro"><?php echo htmlspecialchars($erro); ?></div>
+    <?php endif; ?>
+
+    <!-- Container de Estatísticas -->
+    <div class="stats-container">
+        <a href="lista_animais.php" class="stat-card-link">
+            <div class="stat-card">
+                <h2>Total de Animais</h2>
+                <p><?php echo $total_animais; ?></p>
+            </div>
+        </a>
+        <div class="stat-card">
+            <h2>Último Animal Cadastrado</h2>
+            <?php if ($ultimo_animal): ?>
+                <p>Série: <?php echo htmlspecialchars($ultimo_animal['serie']); ?> / RG: <?php echo htmlspecialchars($ultimo_animal['rg']); ?></p>
+            <?php else: ?>
+                <p>Nenhum animal cadastrado</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
     <div class="container">
         <form action="salvar.php" method="POST">
-            <fieldset class="cadastro-fieldset">
-                <legend>Cadastro do Animal</legend>
+            <fieldset class="resumo-fieldset">
+                <legend>Resumo do Animal</legend>
                 <div class="row-flex">
                     <div class="col-flex">
-                        <label>Série:</label> <input type="text" name="serie">
+                        <label>Série:</label> <input type="text" name="serie" value="" required>
                     </div>
                     <div class="col-flex">
-                        <label>RG:</label> <input type="text" name="rg">
-                    </div>
-                </div>
-                <div class="row-flex">
-                    <div class="col-flex">
-                        <label>Nascimento:</label> <input type="date" name="nascimento">
-                    </div>
-                    <div class="col-flex">
-                        <label>Meses:</label> <input type="number" name="meses" min="0" readonly> <span id="idade-anos" class="idade-anos"></span>
+                        <label>RG:</label> <input type="text" name="rg" value="" required>
                     </div>
                 </div>
                 <div class="row-flex">
                     <div class="col-flex pequeno">
                         <label>Raça:</label>
-                        <select name="raca" class="pequeno">
+                        <select name="raca" class="pequeno" required>
                             <option value="">Selecione</option>
                             <option value="Nelore">Nelore</option>
                             <option value="Brahman">Brahman</option>
@@ -53,8 +84,8 @@ if (empty($_SESSION['logado'])) {
                         </select>
                     </div>
                     <div class="col-flex">
+                        <label>Sexo:</label>
                         <div id="sexo-buttons" class="sexo-buttons-central">
-                            <label class="sexo-label-central">Sexo:</label>
                             <div class="sexo-btns-row">
                                 <button type="button" class="sexo-btn sexo-macho" data-value="M" aria-label="Selecionar macho">Macho</button>
                                 <button type="button" class="sexo-btn sexo-femea" data-value="F" aria-label="Selecionar fêmea">Fêmea</button>
@@ -66,81 +97,47 @@ if (empty($_SESSION['logado'])) {
                 </div>
                 <div class="row-flex">
                     <div class="col-flex">
-                        <label>Pai:</label> <input type="text" name="pai">
-                    </div>
-                    <div class="col-flex">
-                        <label>Avô Materno:</label> <input type="text" name="avo_materno">
+                        <label>Status:</label>
+                        <input type="text" id="status-animal" value="ATIVO" readonly style="font-weight:bold; color:#28a745; width: 120px;">
                     </div>
                 </div>
                 <div class="row-flex">
                     <div class="col-flex">
-                        <label>Mãe Biológica:</label> <input type="text" name="mae_biologica">
+                        <label>Valor Adquirido:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_adquirido" id="valor-adquirido" readonly>
                     </div>
                     <div class="col-flex">
-                        <label>Receptora:</label> <input type="text" name="receptora">
+                        <label>Origem da Compra:</label> <input type="text" name="origem_compra" id="origem-compra" readonly>
                     </div>
-                </div>
-                <label>Ativo:</label>
-                <div id="ativo-buttons">
-                    <button type="button" class="ativo-btn ativo-sim" data-value="S">Sim</button>
-                    <button type="button" class="ativo-btn ativo-nao" data-value="N">Não</button>
-                    <input type="hidden" name="ativo" id="ativo-input">
-                </div><br>
-                <div class="row-flex">
-                    <div class="col-flex">
-                        <label>Valor Adquirido:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_adquirido" inputmode="decimal">
-                    </div>
-                    <div class="col-flex">
-                        <label>Origem da Compra:</label> <input type="text" name="origem_compra">
-                    </div>
-                </div>
-                <div class="row-flex">
-                    <div class="col-flex">
-                        <label>Valor Abate:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_abate" inputmode="decimal">
-                    </div>
-                    <div class="col-flex">
-                        <label>Destino Abate:</label> <input type="text" name="destino_abate">
-                    </div>
-                </div>
-                <div class="row-flex">
-                    <div class="col-flex">
-                        <label>Valor Venda:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="valor_venda" inputmode="decimal">
-                    </div>
-                    <div class="col-flex">
-                        <label>Destino Venda:</label> <input type="text" name="destino_venda">
-                    </div>
-                </div>
-                <!-- Resumo do valor final -->
-                <div class="resumo-valor">
-                    <strong>Resumo:</strong> Valor da Compra - Valor de Venda = <span id="valor-final">R$ 0,00</span>
                 </div>
             </fieldset>
 
-            <fieldset class="entrada-fieldset">
-                <legend>Entrada</legend>
-                <label>Origem:</label> <input type="text" name="origem"><br>
-                <label>Data:</label> <input type="date" name="entrada_data"><br>
-                <label>Nº N.F:</label> <input type="text" name="entrada_nf"><br>
-                <label>Natureza da Operação:</label> <input type="text" name="entrada_natureza"><br>
-                <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais" name="entrada_valor" inputmode="decimal"><br>
-                <label>Observações:</label> <input type="text" name="entrada_obs"><br>
-            </fieldset>
+            <div class="fieldset-row">
+                <fieldset class="entrada-fieldset">
+                    <legend>Entrada</legend>
+                    <label>Origem:</label> <input type="text" name="origem" id="entrada-origem"><br>
+                    <label>Data:</label> <input type="date" name="entrada_data"><br>
+                    <label>Nº N.F:</label> <input type="text" name="entrada_nf"><br>
+                    <label>Natureza:</label> <input type="text" name="entrada_natureza"><br>
+                    <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais" name="entrada_valor" id="entrada-valor" inputmode="decimal"><br>
+                    <label>Observações:</label> <input type="text" name="entrada_obs"><br>
+                </fieldset>
 
-            <fieldset class="saida-fieldset">
-                <legend>Saída</legend>
-                <div class="row-flex">
-                    <div class="col-flex">
-                        <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="saida_valor" inputmode="decimal">
+                <fieldset class="saida-fieldset">
+                    <legend>Saída</legend>
+                    <div class="row-flex">
+                        <div class="col-flex">
+                            <label>Valor:</label> <span>R$</span><input type="text" class="valor-reais pequeno" name="saida_valor" inputmode="decimal">
+                        </div>
+                        <div class="col-flex">
+                            <label>Destino:</label> <input type="text" name="destino">
+                        </div>
                     </div>
-                    <div class="col-flex">
-                        <label>Destino:</label> <input type="text" name="destino">
-                    </div>
-                </div>
-                <label>Data:</label> <input type="date" name="saida_data"><br>
-                <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
-                <label>Natureza da Operação:</label> <input type="text" name="saida_natureza"><br>
-                <label>Observações:</label> <input type="text" name="saida_obs"><br>
-            </fieldset>
+                    <label>Data:</label> <input type="date" name="saida_data"><br>
+                    <label>Nº N.F:</label> <input type="text" name="saida_nf"><br>
+                    <label>Natureza:</label> <input type="text" name="saida_natureza"><br>
+                    <label>Observações:</label> <input type="text" name="saida_obs"><br>
+                </fieldset>
+            </div>
 
             <fieldset class="situacao-fieldset">
                 <legend>Situação do Animal</legend>
@@ -161,7 +158,7 @@ if (empty($_SESSION['logado'])) {
                 <label>Tipo de Cobertura:</label>
                 <select name="cobertura">
                     <option value="">Selecione</option>
-                    <option value="TE">IA</option>
+                    <option value="TE">TE</option>
                     <option value="FIV">FIV</option>
                 </select><br>
             </fieldset>
@@ -170,6 +167,6 @@ if (empty($_SESSION['logado'])) {
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=<?php echo time(); ?>"></script>
 </body>
 </html> 
